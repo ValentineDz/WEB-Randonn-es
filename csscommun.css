@@ -1,3 +1,48 @@
-main{
-    
-}
+:root {
+    --couleur-6: #de773b;
+    --couleur-5: #ffcdb2;
+    --couleur-4: #ffb4a2;
+    --couleur-3: #e5989b;
+    --couleur-2: #b5838d;
+    --couleur-1: #917681;
+    --couleur-0: #6d6875;
+  }
+  body{
+    font-family: "Courier New", monospace;
+    font-size: 30px;
+    margin: 0px;
+  }
+  main {
+    max-width: 1800px;
+    margin: auto;
+  }
+  .barre-de-menu > li {
+    display:inline;
+    list-style: none;
+  }
+  .barre-de-menu {
+    margin: 0px;
+  text-align: center;
+    background-color: var(--couleur-0);
+    padding: 17px 0px;
+  }
+  
+  .barre-de-menu > li > a {
+  color: var(--couleur-6);
+  margin: 5 10px;
+  text-decoration: none;
+  border-radius: 30px ;
+  padding: 5px 10px;
+  }
+  
+  .barre-de-menu > li > a:hover {
+    background-color: var(--couleur-6);
+    color: var(--couleur-0);
+  }
+  .barre-de-menu > li > a.actuel {
+    border-bottom-style: solid;
+    border-bottom-width: 12px;
+    border-color: var(--couleur-5);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
