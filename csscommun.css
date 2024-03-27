@@ -1,6 +1,6 @@
 :root {
     --couleur-6: #de773b;
-    --couleur-5: #ffcdb2;
+    --couleur-5: #3d1c46;
     --couleur-4: #ffb4a2;
     --couleur-3: #e5989b;
     --couleur-2: #b5838d;
@@ -28,15 +28,15 @@
   }
   
   .barre-de-menu > li > a {
-  color: var(--couleur-6);
+  color: var(--couleur-5);
   margin: 5 10px;
   text-decoration: none;
   border-radius: 30px ;
-  padding: 5px 10px;
+  padding: 5px 50px;
   }
   
   .barre-de-menu > li > a:hover {
-    background-color: var(--couleur-6);
+    background-color: var(--couleur-3);
     color: var(--couleur-0);
   }
   .barre-de-menu > li > a.actuel {
@@ -45,4 +45,7 @@
     border-color: var(--couleur-5);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+  }
+img#connexion {
+    height: 4rem;
   }
