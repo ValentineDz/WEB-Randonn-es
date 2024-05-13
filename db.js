@@ -28,6 +28,28 @@ function addRandonnee({ nom, depart, arrive, distance, duree, difficulte, descri
       });
     });
   }
+
+
+async function getAllHikesOrderedAlphabetically() {
+  const db = require('BD_rando.db'); 
+  try {
+      const result = await db.all("SELECT name, starting_point FROM hikes ORDER BY name ASC");
+      return result;
+  } catch (error) {
+      throw error;
+  }
+}
+
+const { open } = require('sqlite');
+const sqlite3 = require('sqlite3');
+
+async function openDb() {
+    return open({
+        filename: './database.sqlite',
+        driver: sqlite3.Database
+    });
+}
+
   
   module.exports = {
     addRandonnee,
