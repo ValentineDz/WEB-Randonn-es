@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const sqlite3 = require('sqlite3').verbose();
 const session = require('express-session');
+const path = require('path');
 
 // Configuration de la base de données
 app.use(session({
@@ -45,4 +46,22 @@ app.use((req, res, next) => {
 const PORT = 3000; 
 app.listen(PORT, () => {
   console.log(`Serveur démarré sur le port http://localhost:${PORT}`);
+});
+
+
+// Configurer EJS comme moteur de rendu
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Middleware pour les fichiers statiques
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Importer les routes
+const indexRoutes = require('./routes/index');
+app.use('/', indexRoutes);
+
+// Démarrage du serveur
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Serveur démarré sur le port ${PORT}`);
 });
