@@ -1,7 +1,0 @@
-@import url("csscommun.css");
-img {
-    height: 8rem;
-}
-body div{
-    background-color: var(--couleur-6);
-}
