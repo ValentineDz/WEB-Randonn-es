@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head >
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="csscommun.css">
+        <link rel="stylesheet" href="Randonner.css">
+      </head>
+      <body>
+        <!-- le menu de navigation -->
+        <div id="banniere" >
+            <img src="dessin-rando.png" alt="Logo du site">
+            <div id="titre" > RandoIsère </div>
+              <div id="connexion" >
+              <img src="connexion.png" alt="Logo connexion">
+              </div>
+        </div>
+        <nav>
+          <ul class="barre-de-menu">
+            <li><a href="Randonner.html" >Accueil</a></li>
+            <li><a href="Contribuer.html" class="actuel" >Contribuer</a></li>
+          </ul>
+        </nav>
+        <main>
+            <section>
+          <h4> Ajouter Votre propre randonnée :</h4>
+          <ul>
+             <!-- vérifier que l'action et le bouton d'action "submit" réagit correctement -->
+          <form action="/contribuer" method="post" enctype="multipart/form-data">
+          <li>
+            <label pour="nomRandonnee">Nom de la randonnée :</label>
+            <input type="text" id="nom-randonnee" name="nom-randonnee" required />
+          </li>
+          <li>
+            <label pour="adresseDepart">Adresse du point de départ :</label>
+            <input type="text" id="adresse-depart" name="adresse-depart" required />
+          </li>
+          <li>
+            <label pour="adresseArrive">Point d'arrivée (optionnel) :</label>
+            <input type="text" id="adresse-arrive" name="adresse-arrive" />
+          </li>
+          <li>
+            <label pour="Distance">Distance à parcourir :</label>
+            <input type="text" id="distance" name="distance" required />
+          </li>
+          <li>
+            <label pour="duree">Durée :</label>
+            <input type="text" id="duree" name="duree" required></input>
+          </li>
+          <li>
+            <label pour="difficulte">Difficulté :</label>
+            <input type="text" id="difficulte" name="difficulte" required></input>
+          </li>
+          <li>
+            <label pour="photo">Photo :</label>
+            <input type="file" id="photo" name="photo" accept="image/*" />
+          </li>
+          <li>
+            <input type="submit" value="Ajouter Randonnée" />
+          </li>
+        </form>
+      </ul>
+            </section>
+        </main>
+        
+      </body>
+        
+
+</html>
