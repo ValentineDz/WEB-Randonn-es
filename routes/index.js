@@ -20,7 +20,7 @@ export function get(request, response) {
             </div>
             <nav>
               <ul class="barre-de-menu">
-                <li><a href="Randonner.html" class="actuel" >Accueil</a></li>
+                <li><a href="/" class="actuel" >Accueil</a></li>
                 <li><a href="Contribuer.html">Contribuer</a></li>
               </ul>
             </nav>

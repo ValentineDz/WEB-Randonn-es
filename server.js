@@ -21,10 +21,14 @@ app.use((request, response, next) => {
   next();
 });
 
+
 //permet d'utiliser le css dans index.js par exemple
 app.use(express.static("public"));
+app.use(express.static("public", { extensions: ["html"] }));
+app.use(express.json());
 
 app.get("/", indexRoute.get);
+
 // Démarrage du serveur
   app.listen(PORT, () => {
     console.log(`Serveur démarré sur le port http://localhost:${PORT}`);
