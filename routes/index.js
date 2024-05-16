@@ -1,41 +1,44 @@
-const express = require('express');
-const router = express.Router();
-const db = require('../config/database');  // Assurez-vous que le chemin est correct
-
-// Route pour la page d'accueil
-const express = require('express');
-const router = express.Router();
-const db = require('../config/database');
-
-router.get('/', (req, res) => {
-    let sql = "SELECT * FROM hikes";
-    if (req.query.sort === 'popularity') {
-        sql += " ORDER BY popularity_score DESC"; // Tri par score
-    } else {
-        sql += " ORDER BY name ASC"; // Tri alphab
-    }
-
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            res.status(500).send("Erreur lors de la récupération des randonnées: " + err.message);
-            return;
-        }
-        res.render('home', { hikes: rows });
-    });
-});
-
-module.exports = router;
-
-///garder le meilleur 
-router.get('/', (req, res) => {
-    let sql = "SELECT * FROM hikes ORDER BY name ASC";
-    db.all(sql, [], (err, rows) => {
-        if (err) {
-            console.error("Erreur lors de la récupération des randonnées: " + err.message);
-            res.status(500).send("Erreur lors de la récupération des randonnées: " + err.message);
-            return;
-        }
-        console.log("Randonnées récupérées : ", rows);
-        res.render('home', { hikes: rows });
-    });
-});
+export function get(request, response) {
+    response.send(`
+    <!DOCTYPE html>
+    <html lang="fr">
+        <head lang="fr">
+            <meta charset="utf-8" />
+            <link rel="stylesheet" href="./csscommun.css">
+            <link rel="stylesheet" href="./Randonner.css">
+          </head>
+          <body>
+            <!-- le menu de navigation -->
+            <div id="banniere" >
+              <img src="./dessin-rando.png" alt="Logo du site">
+            <div id="titre" > RandoIsère </div>
+              <div id="connexion" >
+              <img src="./connexion.png" alt="Logo connexion">
+              <li><a href="sign-up.html"  >S'inscrire</a></li>
+              <li><a href="login.html"  >Se connecter</a></li>
+              </div>
+            </div>
+            <nav>
+              <ul class="barre-de-menu">
+                <li><a href="/" class="actuel" >Accueil</a></li>
+                <li><a href="Contribuer.html">Contribuer</a></li>
+              </ul>
+            </nav>
+    
+            <main>
+              <section>
+                <h4>Liste des Randonnées</h4>
+                <h1>Liste des Randonnées</h1>
+            <ul>
+                <% hikes.forEach(function(hike) { %>
+                    <li><strong><%= hike.name %></strong> - Départ : <%= hike.start_address %></li>
+                <% }); %>
+            </ul>
+            </section>
+    
+            </main>
+            
+          </body>
+    </html> 
+    `);
+}
