@@ -1,67 +1,34 @@
-const express = require('express');
-const app = express();
-const sqlite3 = require('sqlite3').verbose();
-const session = require('express-session');
-const path = require('path');
+import express from "express";
+import { open } from "sqlite";
+import sqlite3 from "sqlite3";
+import cookieSession from "cookie-session";
 
-// Configuration de la base de données
-app.use(session({
-  secret: 'votre_secret_ici',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: 'auto' }
-}));
+const PORT = 3000; 
+import * as indexRoute from "./routes/index.js";
 
-app.use(express.static('public'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// Connexion à la base de données SQLite
-const db = new sqlite3.Database('./data/database.sqlite', sqlite3.OPEN_READWRITE, (err) => {
-  if (err) {
-      console.error('Erreur lors de l\'ouverture de la base de données: ' + err.message);
-  } else {
-      console.log('Connecté à la base de données SQLite.');
-      // Assurez-vous que la table existe, ou créez-la ici
-      db.run('CREATE TABLE IF NOT EXISTS hikes (id INTEGER PRIMARY KEY, name TEXT, description TEXT)', (err) => {
-          if (err) {
-              console.error('Erreur lors de la création de la table hikes: ' + err.message);
-          }
-      });
-  }
-});
-
-// Importation des routeurs
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-
-// Utilisation des routeurs
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+function start() {
+  const app = express();
 
 // Gestionnaire d'erreur de base
-app.use((req, res, next) => {
-    res.status(404).send("Désolé, cette page n'existe pas !");
+ // app.use((req, res, next) => {
+ //   res.status(404).send("Désolé, cette page n'existe pas !");
+//}); ca fonctionne pas pour l'instant laisser de coté
+
+//log la méthode et l'url de chaque requete recu par le serveur
+app.use((request, response, next) => {
+  console.log(`${request.method} ${request.url}`);
+  next();
 });
-const PORT = 3000; 
-app.listen(PORT, () => {
-  console.log(`Serveur démarré sur le port http://localhost:${PORT}`);
-});
 
+//permet d'utiliser le css dans index.js par exemple
+app.use(express.static("public"));
 
-// Configurer EJS comme moteur de rendu
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
-// Middleware pour les fichiers statiques
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Importer les routes
-const indexRoutes = require('./routes/index');
-app.use('/', indexRoutes);
-
+app.get("/", indexRoute.get);
 // Démarrage du serveur
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Serveur démarré sur le port ${PORT}`);
-});
+  app.listen(PORT, () => {
+    console.log(`Serveur démarré sur le port http://localhost:${PORT}`);
+  });
+}
+
+start();
