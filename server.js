@@ -7,7 +7,7 @@ const databaseFile = "database.sqlite";
 const PORT = 3000; 
 import * as indexRoute from "./routes/index.js";
 
-function start() {
+function start(database) {
   const app = express();
 
 // Gestionnaire d'erreur de base
@@ -39,8 +39,6 @@ app.get("/", indexRoute.get);
     console.log(`Serveur démarré sur le port http://localhost:${PORT}`);
   });
 }
-
-start();
 
 open({ filename: databaseFile, driver: sqlite3.Database })
   .then(start)
