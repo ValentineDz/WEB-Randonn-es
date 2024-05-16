@@ -14,6 +14,8 @@ export function get(request, response) {
             <div id="titre" > RandoIsère </div>
               <div id="connexion" >
               <img src="./connexion.png" alt="Logo connexion">
+              <li><a href="sign-up.html"  >S'inscrire</a></li>
+              <li><a href="login.html"  >Se connecter</a></li>
               </div>
             </div>
             <nav>

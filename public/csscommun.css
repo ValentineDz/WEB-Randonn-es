@@ -54,6 +54,14 @@
     padding-right: 3px;
     margin-left: auto;
   }
+  #connexion {
+    padding-top: 10px;
+    padding-right: 10px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 17px;
+    font-weight: 12000;
+
+  }
   #banniere{
     display:flex;
     padding-top: 3px;

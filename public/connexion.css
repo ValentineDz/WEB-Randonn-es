@@ -1,0 +1,35 @@
+:root {
+    --spacing-s: 8px;
+    --spacing-m: 16px;
+    --spacing-l: 32px;
+    --h-line-width: 4px;
+    --h-line-color: #917681;
+    --danger-color: #b04563;
+    
+  }
+
+  
+  h1 {
+    border-bottom: var(--h-line-width) solid var(--h-line-color);
+    margin-top: var(--spacing-l);
+    margin-bottom: var(--spacing-m);
+  }
+  
+  h2 {
+    margin-top: var(--spacing-l);
+    margin-bottom: var(--spacing-m);
+  }
+  
+  p {
+    margin: var(--spacing-m) 0;
+  }
+  
+  /* Form errors are not displayed by default, but can be enabled with
+     the enabled class */
+  form .error {
+    color: var(--danger-color);
+  }
+  
+  form .error:not(.enabled) {
+    display: none;
+  }
