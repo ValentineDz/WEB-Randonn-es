@@ -1,5 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('./data/database.sqlite', (createDbError) => {
+const path = require('path');
+const dbPath = path.resolve(__dirname, '../database.sqlite');
+const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE, (err) => {
   if (createDbError) {
     console.error('Erreur lors de l\'ouverture de la base de données ' + createDbError.message);
   } else {
@@ -14,3 +16,7 @@ const db = new sqlite3.Database('./data/database.sqlite', (createDbError) => {
     });
   }
 });
+
+
+module.exports = db;
+
