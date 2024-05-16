@@ -50,7 +50,7 @@ open({ filename: databaseFile, driver: sqlite3.Database })
   });
 
 
-
+/*
 const path = require('path');
 
 // EJS 
@@ -67,7 +67,6 @@ app.use(express.static('public'));
 
 app.use('/', indexRouter);
 
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
   });
+  */
+ 
