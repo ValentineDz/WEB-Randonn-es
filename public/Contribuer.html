@@ -29,35 +29,23 @@
              <!-- vérifier que l'action et le bouton d'action "submit" réagit correctement -->
           <form action="/contribuer" method="post" enctype="multipart/form-data">
           <li>
-            <label pour="nomRandonnee">Nom de la randonnée :</label>
+            <label pour="nom-randonnee">Nom de la randonnée :</label>
             <input type="text" id="nom-randonnee" name="nom-randonnee" required />
           </li>
+          <li>  
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea><br></li>
           <li>
             <label pour="adresseDepart">Adresse du point de départ :</label>
             <input type="text" id="adresse-depart" name="adresse-depart" required />
           </li>
-          <li>
-            <label pour="adresseArrive">Point d'arrivée (optionnel) :</label>
-            <input type="text" id="adresse-arrive" name="adresse-arrive" />
-          </li>
-          <li>
-            <label pour="Distance">Distance à parcourir :</label>
-            <input type="text" id="distance" name="distance" required />
-          </li>
-          <li>
-            <label pour="duree">Durée :</label>
-            <input type="text" id="duree" name="duree" required></input>
-          </li>
-          <li>
-            <label pour="difficulte">Difficulté :</label>
-            <input type="text" id="difficulte" name="difficulte" required></input>
-          </li>
+      
           <li>
             <label pour="photo">Photo :</label>
             <input type="file" id="photo" name="photo" accept="image/*" />
           </li>
           <li>
-            <input type="submit" value="Ajouter Randonnée" />
+            <input type="submit" >Ajouter Randonnée</button>
           </li>
         </form>
       </ul>

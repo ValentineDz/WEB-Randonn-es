@@ -48,6 +48,46 @@ open({ filename: databaseFile, driver: sqlite3.Database })
   });
 
 
+// Route pour Contribuer
+app.get('/contribuer', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/contribuer.html'));
+});
+
+// Route nvlle randonnée
+router.post('/Contribuer', (req, res) => {
+  const { nom, description, depart } = req.body;
+  const sql = "INSERT INTO randonnees (nom, description, adresse_depart) VALUES (?, ?, ?)"; 
+  db.run(sql, [nom, description, depart], function(err) {
+      if (err) {
+          console.error("Erreur lors de l'enregistrement de la randonnée:", err.message);
+          res.status(500).send("Erreur lors de l'enregistrement de la randonnée: " + err.message);
+          return;
+      }
+      console.log(`Une nouvelle randonnée a été ajoutée avec l'ID ${this.lastID}`);
+      res.redirect(`/randonnee/${this.lastID}`);
+  });
+});
+
+
+
+app.post('/submit-randonnee', (req, res) => {
+const { nom, description, depart } = req.body;
+const sql = "INSERT INTO randonnees (nom, description, adresse_depart) VALUES (?, ?, ?)";
+db.run(sql, [nom, description, depart], function(err) {
+  if (err) {
+    console.error(err.message);
+    res.status(500).send("Erreur lors de l'enregistrement de la randonnée: " + err.message);
+    return;
+  }
+  console.log(`A new row has been created with rowid ${this.lastID}`);
+  res.redirect('/'); // Rediriger vers la page d'accueil après la soumission
+});
+});
+
+
+
+
+
 /*
 const path = require('path');
 
