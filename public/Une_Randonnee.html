@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= randonnee.nom %></title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Assurez-vous que le chemin est correct -->
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/contribuer">Contribuer</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1><%= randonnee.nom %></h1>
+        <p><%= randonnee.description %></p>
+        <p>Adresse de départ : <%= randonnee.adresse_depart %></p>
+        <p>Score de popularité : <%= randonnee.popularity_score %></p>
+        <% if (randonnee.image) { %>
+            <img src="<%= randonnee.image %>" alt="Image de <%= randonnee.nom %>">
+        <% } %>
+    </main>
+</body>
+</html>
