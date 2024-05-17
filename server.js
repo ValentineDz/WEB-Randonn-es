@@ -22,13 +22,30 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-function start(database) {
+async function start(database) {
   const app = express();
   // Gestionnaire d'erreur de base
   // app.use((req, res, next) => {
   //   res.status(404).send("Désolé, cette page n'existe pas !");
   // }); ca fonctionne pas pour l'instant laisser de coté
     // Log la méthode et l'URL de chaque requête reçue par le serveur
+    
+    try {
+      await database.exec(`
+        PRAGMA foreign_keys = OFF;
+        BEGIN TRANSACTION;
+        ALTER TABLE randonnees ADD COLUMN image TEXT;
+        COMMIT;
+        PRAGMA foreign_keys = ON;
+      `);
+    } catch (err) {
+      if (err.message.includes("duplicate column name")) {
+        console.log("Column 'image' already exists, skipping alteration.");
+      } else {
+        console.error("Error altering table:", err.message);
+      }
+    }
+    
     app.use((request, response, next) => {
       console.log(`${request.method} ${request.url}`);
       next();
