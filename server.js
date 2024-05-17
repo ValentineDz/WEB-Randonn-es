@@ -2,6 +2,7 @@ import express from "express";
 import { open } from "sqlite";
 import sqlite3 from "sqlite3";
 import cookieSession from "cookie-session";
+import path from "path";
 
 const databaseFile = "database.sqlite";
 const PORT = 3000; 
@@ -31,26 +32,32 @@ app.use((request, response, next) => {
 app.use(express.static("public"));
 app.use(express.static("public", { extensions: ["html"] }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+  console.log('Content-Type:', req.headers['content-type']);
+  next();
+});
+
 
 app.get("/", indexRoute.get);
 
 // Route pour Contribuer
 app.get('/contribuer', (req, res) => {
-  res.sendFile(path.join(__dirname, '../views/contribuer.html'));
+  res.sendFile(path.join(__dirname, '../public/Contribuer.html'));
 });
 
 // Route nvlle randonnée
 app.post('./public/Contribuer.html', (req, res) => {
   const { nom, description, depart } = req.body;
   const sql = "INSERT INTO randonnees (nom, description, adresse_depart) VALUES (?, ?, ?)"; 
-  db.run(sql, [nom, description, depart], function(err) {
+  req.context.database.run(sql, [nom, description, depart], function(err) {
       if (err) {
           console.error("Erreur lors de l'enregistrement de la randonnée:", err.message);
           res.status(500).send("Erreur lors de l'enregistrement de la randonnée: " + err.message);
           return;
       }
       console.log(`Une nouvelle randonnée a été ajoutée avec l'ID ${this.lastID}`);
-      res.redirect(`/randonnee/${this.lastID}`);
+      res.redirect('/');
   });
 });
 
@@ -58,14 +65,15 @@ app.post('./public/Contribuer.html', (req, res) => {
 
 app.post('/submit-randonnee', (req, res) => {
 const { nom, description, depart } = req.body;
+console.log("données recu:", { nom, description, depart });
 const sql = "INSERT INTO randonnees (nom, description, adresse_depart) VALUES (?, ?, ?)";
-db.run(sql, [nom, description, depart], function(err) {
+req.context.database.run(sql, [nom, description, depart], function(err) {
   if (err) {
     console.error(err.message);
     res.status(500).send("Erreur lors de l'enregistrement de la randonnée: " + err.message);
     return;
   }
-  console.log(`A new row has been created with rowid ${this.lastID}`);
+  console.log(`nouvelle ligne ajouté : ${this.lastID}`);
   res.redirect('/'); // Rediriger vers la page d'accueil après la soumission
 });
 });

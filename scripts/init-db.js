@@ -1,7 +1,7 @@
 import sqlite3 from "sqlite3";
 import { open } from "sqlite";
 
-const filename = "../BD_rando.db";
+const filename = "database.sqlite";
 
 open({ filename, driver: sqlite3.Database })
   .then((db) => {

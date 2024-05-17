@@ -27,25 +27,24 @@
           <h4> Ajouter Votre propre randonnée :</h4>
           <ul>
              <!-- vérifier que l'action et le bouton d'action "submit" réagit correctement -->
-          <form action="/contribuer" method="post" enctype="multipart/form-data">
+          <form action="/submit-randonnee" method="post" enctype="multipart/form-data">
           <li>
             <label pour="nom-randonnee">Nom de la randonnée :</label>
-            <input type="text" id="nom-randonnee" name="nom-randonnee" required />
+            <input type="text" id="nom-randonnee" name="nom" required />
           </li>
           <li>  
-            <label for="description">Description:</label>
+            <label for="description">Description :</label>
             <textarea id="description" name="description" required></textarea><br></li>
           <li>
             <label pour="adresseDepart">Adresse du point de départ :</label>
-            <input type="text" id="adresse-depart" name="adresse-depart" required />
+            <input type="text" id="adresse-depart" name="depart" required />
           </li>
-      
           <li>
             <label pour="photo">Photo :</label>
             <input type="file" id="photo" name="photo" accept="image/*" />
           </li>
           <li>
-            <input type="submit" >Ajouter Randonnée</button>
+            <button type="submit" >Ajouter Randonnée</button>
           </li>
         </form>
       </ul>
