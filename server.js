@@ -34,27 +34,13 @@ app.use(express.json());
 
 app.get("/", indexRoute.get);
 
-// Démarrage du serveur
-  app.listen(PORT, () => {
-    console.log(`Serveur démarré sur le port http://localhost:${PORT}`);
-  });
-}
-
-open({ filename: databaseFile, driver: sqlite3.Database })
-  .then(start)
-  .catch((error) => {
-    console.error("Error opening database", error);
-    process.exit(1);
-  });
-
-
 // Route pour Contribuer
 app.get('/contribuer', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/contribuer.html'));
 });
 
 // Route nvlle randonnée
-router.post('/Contribuer', (req, res) => {
+app.post('./public/Contribuer.html', (req, res) => {
   const { nom, description, depart } = req.body;
   const sql = "INSERT INTO randonnees (nom, description, adresse_depart) VALUES (?, ?, ?)"; 
   db.run(sql, [nom, description, depart], function(err) {
@@ -83,6 +69,23 @@ db.run(sql, [nom, description, depart], function(err) {
   res.redirect('/'); // Rediriger vers la page d'accueil après la soumission
 });
 });
+
+// Démarrage du serveur
+  app.listen(PORT, () => {
+    console.log(`Serveur démarré sur le port http://localhost:${PORT}`);
+  });
+
+}
+
+open({ filename: databaseFile, driver: sqlite3.Database })
+  .then(start)
+  .catch((error) => {
+    console.error("Error opening database", error);
+    process.exit(1);
+  });
+
+
+
 
 
 
