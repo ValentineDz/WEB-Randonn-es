@@ -16,17 +16,16 @@
     </header>
     <main>
         <h1>Liste des Randonnées</h1>
-        <!-- Formulaire pour sélectionner le mode de tri -->
-        <form action="/" method="get">
-            <label for="sort">Trier par :</label>
-            <select name="sort" id="sort" onchange="this.form.submit()">
-                <option value="name">Alphabétique</option>
-                <option value="popularity">Popularité</option>
-            </select>
-        </form>
         <ul>
             <% hikes.forEach(hike => { %>
-                <li><%= hike.name %>: Départ à <%= hike.start_address %> - Score: <%= hike.popularity_score %></li>
+                <li>
+                    <a href="/randonnee/<%= hike.id %>">
+                        <%= hike.nom %>: Départ à <%= hike.adresse_depart %> - <%= hike.description %>
+                        <% if (hike.image) { %>
+                            <img src="<%= hike.image %>" alt="Image de <%= hike.nom %>" style="width:100px;height:auto;">
+                        <% } %>
+                    </a>
+                </li>
             <% }); %>
         </ul>
     </main>
