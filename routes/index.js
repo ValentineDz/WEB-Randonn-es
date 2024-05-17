@@ -38,8 +38,8 @@ export async function get(request, response) {
         </nav>
         <main>
           <section>
-            <h4>Liste des Randonnées</h4>
-            <h1>Liste des Randonnées</h1>
+            <h4>Liste des Randonnées : </h4>
+            
             ${randonneesHTML}
           </section>
         </main>
